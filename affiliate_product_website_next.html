@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitFinds — As Seen In My Reels</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #111118;
+  --card: #16161f;
+  --border: rgba(255,255,255,0.07);
+  --accent: #ff3c5f;
+  --accent2: #ff8c42;
+  --accent3: #00e5c0;
+  --gold: #ffd166;
+  --text: #f0f0f5;
+  --muted: #7a7a9a;
+  --white: #ffffff;
+  --grad: linear-gradient(135deg, #ff3c5f, #ff8c42);
+  --grad2: linear-gradient(135deg, #00e5c0, #0090ff);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+  mix-blend-mode: screen;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(255,60,95,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+}
+body:hover .cursor { opacity: 1; }
+a:hover ~ .cursor, button:hover ~ .cursor { width: 20px; height: 20px; }
+
+/* ── PAGE LOADER ── */
+#loader {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
+#loader.done { opacity: 0; visibility: hidden; }
+.loader-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+  animation: pulse 1s ease infinite alternate;
+}
+.loader-bar {
+  width: 200px; height: 2px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.loader-fill {
+  height: 100%;
+  background: var(--grad);
+  border-radius: 1px;
+  animation: loadfill 1.8s ease forwards;
+}
+@keyframes loadfill { from { width: 0 } to { width: 100% } }
+@keyframes pulse { from { opacity: 0.7 } to { opacity: 1 } }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 16px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(10,10,15,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.3s;
+}
+nav.scrolled { padding: 12px 48px; }
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex; gap: 36px; list-style: none;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px; font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta {
+  background: var(--grad);
+  color: white; border: none;
+  padding: 10px 22px; border-radius: 100px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 600;
+  cursor: none; letter-spacing: 0.03em;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.nav-cta:hover { transform: scale(1.05); box-shadow: 0 4px 24px rgba(255,60,95,0.4); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 140px 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(255,60,95,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 50% at 20% 80%, rgba(0,229,192,0.08) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+.hero-content { max-width: 680px; position: relative; z-index: 2; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,60,95,0.1);
+  border: 1px solid rgba(255,60,95,0.3);
+  padding: 6px 16px; border-radius: 100px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 28px;
+  opacity: 0; animation: fadeUp 0.6s 2s ease forwards;
+}
+.hero-badge .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: blink 1.5s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+h1.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(44px, 7vw, 88px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -2px;
+  margin-bottom: 24px;
+  opacity: 0; animation: fadeUp 0.7s 2.1s ease forwards;
+}
+h1.hero-title .line-grad {
+  background: var(--grad);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+h1.hero-title .line-teal {
+  background: var(--grad2);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size: 18px; font-weight: 300; color: var(--muted);
+  line-height: 1.7; margin-bottom: 40px;
+  opacity: 0; animation: fadeUp 0.7s 2.25s ease forwards;
+}
+.hero-sub strong { color: var(--text); font-weight: 500; }
+.hero-actions {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.7s 2.4s ease forwards;
+}
+.btn-primary {
+  background: var(--grad); color: white;
+  padding: 16px 36px; border-radius: 100px;
+  font-size: 15px; font-weight: 600;
+  text-decoration: none; letter-spacing: 0.02em;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,60,95,0.45); }
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 16px 36px; border-radius: 100px;
+  font-size: 15px; font-weight: 500;
+  text-decoration: none; letter-spacing: 0.02em;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.04); }
+.hero-stats {
+  display: flex; gap: 40px; margin-top: 56px;
+  opacity: 0; animation: fadeUp 0.7s 2.55s ease forwards;
+}
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px; font-weight: 800;
+  background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.stat-lbl { font-size: 12px; color: var(--muted); margin-top: 2px; letter-spacing: 0.05em; }
+.hero-visual {
+  position: absolute; right: 48px; top: 50%;
+  transform: translateY(-50%);
+  width: 360px;
+  opacity: 0; animation: fadeLeft 0.9s 2.4s ease forwards;
+}
+.phone-mock {
+  width: 220px; height: 420px;
+  background: var(--card);
+  border-radius: 36px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+}
+.phone-notch {
+  width: 80px; height: 24px;
+  background: var(--bg);
+  border-radius: 0 0 14px 14px;
+  margin: 0 auto;
+}
+.phone-reel {
+  width: 100%; height: 260px;
+  background: linear-gradient(180deg, #1a0a1a 0%, #0d1a2d 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.reel-play {
+  width: 56px; height: 56px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  animation: float 3s ease infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.reel-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 14px; background: linear-gradient(transparent, rgba(0,0,0,0.8));
+}
+.reel-tag {
+  background: var(--accent); color: white;
+  font-size: 10px; font-weight: 600;
+  padding: 3px 10px; border-radius: 100px; display: inline-block;
+  margin-bottom: 6px;
+}
+.reel-title { font-size: 12px; font-weight: 500; line-height: 1.3; }
+.phone-products { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.mini-product {
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px; padding: 10px;
+  display: flex; align-items: center; gap: 10px;
+  border: 1px solid var(--border);
+}
+.mini-img {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.mini-name { font-size: 11px; font-weight: 500; }
+.mini-price { font-size: 10px; color: var(--accent); font-weight: 600; }
+.floating-badge {
+  position: absolute;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 12px; font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  white-space: nowrap;
+}
+.badge-commission {
+  top: 30%; right: -80px;
+  color: var(--accent3);
+  animation: float 4s ease infinite;
+}
+.badge-views {
+  bottom: 25%; left: -90px;
+  color: var(--gold);
+  animation: float 3.5s 1s ease infinite;
+}
+
+/* ── ADSENSE SLOT ── */
+.adsense-slot {
+  background: rgba(255,255,255,0.02);
+  border: 1px dashed rgba(255,255,255,0.08);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 12px;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  position: relative;
+}
+.adsense-slot::before {
+  content: 'Google AdSense — Advertisement';
+  font-size: 11px; opacity: 0.5;
+}
+.ad-leaderboard { height: 90px; max-width: 728px; margin: 0 auto; }
+.ad-rectangle { height: 250px; }
+
+/* ── SECTION COMMON ── */
+section { padding: 100px 48px; }
+.section-label {
+  font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--accent); font-weight: 600; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-label::before { content: ''; width: 24px; height: 2px; background: var(--accent); border-radius: 1px; }
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800; letter-spacing: -1.5px;
+  line-height: 1.05; margin-bottom: 16px;
+}
+.section-sub { font-size: 16px; color: var(--muted); max-width: 500px; line-height: 1.7; font-weight: 300; }
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin: 48px 0 40px;
+}
+.filter-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 10px 22px; border-radius: 100px;
+  font-size: 13px; font-weight: 500;
+  cursor: none; transition: all 0.2s;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 0.02em;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: rgba(255,60,95,0.1);
+  border-color: rgba(255,60,95,0.4);
+  color: var(--accent);
+}
+
+/* ── PRODUCT GRID ── */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.product-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.product-card.visible {
+  animation: fadeUp 0.5s ease forwards;
+}
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  border-color: rgba(255,60,95,0.3);
+}
+.product-card:hover .card-image { transform: scale(1.06); }
+.card-image-wrap {
+  height: 220px; overflow: hidden;
+  background: linear-gradient(135deg, #1a1a28, #0d1520);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.card-image {
+  font-size: 72px;
+  transition: transform 0.4s ease;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.4));
+}
+.card-badges {
+  position: absolute; top: 14px; left: 14px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.badge {
+  padding: 4px 12px; border-radius: 100px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
+}
+.badge-hot { background: var(--accent); color: white; animation: badgepulse 2s ease infinite; }
+.badge-new { background: var(--accent3); color: #0a0a0f; }
+.badge-sale { background: var(--gold); color: #0a0a0f; }
+@keyframes badgepulse { 0%,100%{box-shadow:0 0 0 0 rgba(255,60,95,0.4)} 50%{box-shadow:0 0 0 6px rgba(255,60,95,0)} }
+.card-reel-btn {
+  position: absolute; bottom: 12px; right: 12px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 100px; padding: 6px 14px;
+  font-size: 11px; font-weight: 500; color: white;
+  backdrop-filter: blur(8px); cursor: none;
+  display: flex; align-items: center; gap: 5px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.card-reel-btn:hover { background: rgba(255,255,255,0.2); }
+.card-body { padding: 20px; }
+.card-cat {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+}
+.card-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px; font-weight: 700;
+  margin-bottom: 6px; line-height: 1.2;
+}
+.card-desc { font-size: 13px; color: var(--muted); line-height: 1.5; font-weight: 300; margin-bottom: 18px; }
+.card-footer { display: flex; align-items: center; justify-content: space-between; }
+.card-price {
+  display: flex; align-items: baseline; gap: 6px;
+}
+.price-main {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 800; color: var(--white);
+}
+.price-old {
+  font-size: 14px; color: var(--muted);
+  text-decoration: line-through;
+}
+.price-comm {
+  font-size: 11px; color: var(--accent3);
+  font-weight: 500; margin-top: 2px;
+  letter-spacing: 0.03em;
+}
+.buy-btn {
+  background: var(--grad);
+  color: white; border: none;
+  padding: 12px 20px; border-radius: 100px;
+  font-size: 13px; font-weight: 600;
+  cursor: none; letter-spacing: 0.03em;
+  text-decoration: none; display: inline-block;
+  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.buy-btn:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255,60,95,0.4); }
+
+/* ── REELS SECTION ── */
+#reels { background: var(--bg2); }
+.reels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px; margin-top: 48px;
+}
+.reel-card {
+  border-radius: 16px; overflow: hidden;
+  aspect-ratio: 9/16; max-height: 360px;
+  background: linear-gradient(180deg, #1a0e2e 0%, #0d1a2d 100%);
+  position: relative; cursor: none;
+  border: 1px solid var(--border);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  opacity: 0; transform: translateY(30px);
+}
+.reel-card.visible { animation: fadeUp 0.5s ease forwards; }
+.reel-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.reel-emoji { font-size: 48px; margin-bottom: 12px; }
+.reel-card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px; font-weight: 700;
+  text-align: center; padding: 0 16px;
+  margin-bottom: 8px;
+}
+.reel-card-views {
+  font-size: 12px; color: var(--muted);
+}
+.reel-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(transparent 40%, rgba(0,0,0,0.85) 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 16px;
+}
+.reel-products-tag {
+  font-size: 11px; color: var(--accent3); font-weight: 500;
+  margin-bottom: 4px;
+}
+.reel-play-btn {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px; height: 52px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: background 0.2s;
+}
+.reel-card:hover .reel-play-btn { background: rgba(255,60,95,0.4); }
+
+/* ── HOW IT WORKS ── */
+#how { position: relative; }
+.steps-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2px; margin-top: 60px;
+}
+.step {
+  background: var(--card);
+  padding: 36px 28px;
+  position: relative;
+  opacity: 0; transform: translateY(30px);
+}
+.step.visible { animation: fadeUp 0.5s ease forwards; }
+.step:first-child { border-radius: 20px 0 0 20px; }
+.step:last-child { border-radius: 0 20px 20px 0; }
+.step-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 64px; font-weight: 800;
+  color: rgba(255,60,95,0.08);
+  line-height: 1; margin-bottom: 16px;
+}
+.step-icon { font-size: 32px; margin-bottom: 14px; }
+.step-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px; font-weight: 700; margin-bottom: 10px;
+}
+.step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+.step-connector {
+  position: absolute; right: -14px; top: 50%;
+  transform: translateY(-50%);
+  width: 28px; height: 28px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: var(--accent); z-index: 2;
+}
+.step:last-child .step-connector { display: none; }
+
+/* ── NEWSLETTER ── */
+#newsletter {
+  background: var(--bg2);
+  text-align: center;
+}
+.newsletter-box {
+  max-width: 560px; margin: 0 auto;
+}
+.newsletter-form {
+  display: flex; gap: 12px; margin-top: 36px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 100px; padding: 6px 6px 6px 24px;
+}
+.newsletter-input {
+  flex: 1; background: none; border: none; outline: none;
+  color: var(--text); font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+}
+.newsletter-input::placeholder { color: var(--muted); }
+.newsletter-btn {
+  background: var(--grad); color: white; border: none;
+  padding: 12px 28px; border-radius: 100px;
+  font-size: 14px; font-weight: 600; cursor: none;
+  font-family: 'Outfit', sans-serif; white-space: nowrap;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.newsletter-btn:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(255,60,95,0.4); }
+.newsletter-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 48px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 800;
+  background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+.footer-copy { font-size: 12px; color: var(--muted); }
+
+/* ── MARQUEE ── */
+.marquee-section { overflow: hidden; padding: 24px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); }
+.marquee-track { display: flex; gap: 48px; animation: marquee 18s linear infinite; white-space: nowrap; }
+.marquee-item { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.marquee-item span { color: var(--accent); }
+@keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes fadeLeft { from { opacity: 0; transform: translateX(40px) } to { opacity: 1; transform: translateX(0) } }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  nav { padding: 14px 24px; }
+  .nav-links { display: none; }
+  section { padding: 70px 24px; }
+  #hero { padding: 110px 24px 70px; }
+  .hero-visual { display: none; }
+  .steps-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .step:first-child { border-radius: 20px 0 0 0; }
+  .step:last-child { border-radius: 0 0 20px 20px; }
+  .step:nth-child(2) { border-radius: 0 20px 0 0; }
+  .step:nth-child(3) { border-radius: 0 0 0 20px; }
+  footer { padding: 32px 24px; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">FitFinds</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">FitFinds</a>
+  <ul class="nav-links">
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#reels">Reels</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#newsletter">Newsletter</a></li>
+  </ul>
+  <button class="nav-cta">🔥 Shop My Picks</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Seen on Instagram Reels</div>
+    <h1 class="hero-title">
+      <span id="typewriter-line"></span><br>
+      <span class="line-grad">Products I</span><br>
+      <span class="line-teal">Actually Use</span>
+    </h1>
+    <p class="hero-sub">Every product you see in my reels — <strong>right here</strong>. Handpicked, tested, and linked so you can grab them instantly. No searching. Just shop.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">🛒 Shop All Picks</a>
+      <a href="#reels" class="btn-secondary">▶ Watch Reels</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">120+</div>
+        <div class="stat-lbl">Products Tested</div>
+      </div>
+      <div>
+        <div class="stat-num">4.8★</div>
+        <div class="stat-lbl">Avg. Rating</div>
+      </div>
+      <div>
+        <div class="stat-num">50K+</div>
+        <div class="stat-lbl">Happy Shoppers</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="phone-mock">
+      <div class="phone-notch"></div>
+      <div class="phone-reel">
+        <div class="reel-play">▶</div>
+        <div class="reel-overlay">
+          <div class="reel-tag">🔥 Trending</div>
+          <div class="reel-title">My morning routine essentials</div>
+        </div>
+      </div>
+      <div class="phone-products">
+        <div class="mini-product">
+          <div class="mini-img" style="background:rgba(255,60,95,0.15)">🥤</div>
+          <div><div class="mini-name">Protein Shaker Pro</div><div class="mini-price">$24.99</div></div>
+        </div>
+        <div class="mini-product">
+          <div class="mini-img" style="background:rgba(0,229,192,0.15)">🏋️</div>
+          <div><div class="mini-name">Resistance Band Set</div><div class="mini-price">$18.99</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="floating-badge badge-commission">💸 +₹450 commission earned</div>
+    <div class="floating-badge badge-views">👁 2.4M views</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item">🔥 Fitness Gear <span>→</span></div>
+    <div class="marquee-item">💊 Supplements <span>→</span></div>
+    <div class="marquee-item">🧘 Wellness <span>→</span></div>
+    <div class="marquee-item">👟 Activewear <span>→</span></div>
+    <div class="marquee-item">🍱 Nutrition <span>→</span></div>
+    <div class="marquee-item">💻 Fitness Tech <span>→</span></div>
+    <div class="marquee-item">🏠 Home Gym <span>→</span></div>
+    <div class="marquee-item">🔥 Fitness Gear <span>→</span></div>
+    <div class="marquee-item">💊 Supplements <span>→</span></div>
+    <div class="marquee-item">🧘 Wellness <span>→</span></div>
+    <div class="marquee-item">👟 Activewear <span>→</span></div>
+    <div class="marquee-item">🍱 Nutrition <span>→</span></div>
+    <div class="marquee-item">💻 Fitness Tech <span>→</span></div>
+    <div class="marquee-item">🏠 Home Gym <span>→</span></div>
+  </div>
+</div>
+
+<!-- ADSENSE TOP -->
+<div style="padding: 24px 48px; background: var(--bg2);">
+  <div class="adsense-slot ad-leaderboard"></div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-label">My Top Picks</div>
+  <div class="section-title">Shop From My Reels</div>
+  <p class="section-sub">Every item I've featured, reviewed, and personally recommend. Tap to buy directly.</p>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProducts('all', this)">All Products</button>
+    <button class="filter-btn" onclick="filterProducts('fitness', this)">🏋️ Fitness Gear</button>
+    <button class="filter-btn" onclick="filterProducts('supplements', this)">💊 Supplements</button>
+    <button class="filter-btn" onclick="filterProducts('wellness', this)">🧘 Wellness</button>
+    <button class="filter-btn" onclick="filterProducts('activewear', this)">👟 Activewear</button>
+    <button class="filter-btn" onclick="filterProducts('tech', this)">💻 Fitness Tech</button>
+  </div>
+
+  <div class="products-grid" id="productsGrid">
+
+    <div class="product-card" data-cat="fitness">
+      <div class="card-image-wrap">
+        <div class="card-image">🏋️</div>
+        <div class="card-badges"><span class="badge badge-hot">🔥 HOT</span></div>
+        <a href="#" class="card-reel-btn">▶ Watch Reel</a>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Fitness Gear</div>
+        <div class="card-name">PowerGrip Resistance Bands</div>
+        <div class="card-desc">5-level resistance set. Used in my full-body home workout reel.</div>
+        <div class="card-footer">
+          <div>
+            <div class="card-price"><span class="price-main">₹1,299</span><span class="price-old">₹1,899</span></div>
+            <div class="price-comm">You save ₹600 · I earn ~₹130</div>
+          </div>
+          <a href="YOUR_AFFILIATE_LINK" class="buy-btn">Buy Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="supplements">
+      <div class="card-image-wrap" style="background:linear-gradient(135deg,#1a2a1a,#0d1a0d)">
+        <div class="card-image">🥤</div>
+        <div class="card-badges"><span class="badge badge-new">✨ NEW</span></div>
+        <a href="#" class="card-reel-btn">▶ Watch Reel</a>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Supplements</div>
+        <div class="card-name">WheyPro Protein Powder</div>
+        <div class="card-desc">25g protein per scoop. My post-workout staple. Chocolate flavor is 🔥</div>
+        <div class="card-footer">
+          <div>
+            <div class="card-price"><span class="price-main">₹2,499</span></div>
+            <div class="price-comm">I earn ~₹250 per sale</div>
+          </div>
+          <a href="YOUR_AFFILIATE_LINK" class="buy-btn">Buy Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="wellness">
+      <div class="card-image-wrap" style="background:linear-gradient(135deg,#0d1a2a,#1a0d2a)">
+        <div class="card-image">🧘</div>
+        <div class="card-badges"><span class="badge badge-sale">💰 SALE</span></div>
+        <a href="#" class="card-reel-btn">▶ Watch Reel</a>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Wellness</div>
+        <div class="card-name">Yoga Mat Ultra Grip</div>
+        <div class="card-desc">6mm thick, non-slip, eco-friendly. The one I use every morning.</div>
+        <div class="card-footer">
+          <div>
+            <div class="card-price"><span class="price-main">₹899</span><span class="price-old">₹1,499</span></div>
+            <div class="price-comm">I earn ~₹90 per sale</div>
+          </div>
+          <a href="YOUR_AFFILIATE_LINK" class="buy-btn">Buy Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="activewear">
+      <div class="card-image-wrap" style="background:linear-gradient(135deg,#2a0d1a,#1a0d0d)">
+        <div class="card-image">👟</div>
+        <div class="card-badges"><span class="badge badge-hot">🔥 HOT</span></div>
+        <a href="#" class="card-reel-btn">▶ Watch Reel</a>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Activewear</div>
+        <div class="card-name">FlexFit Training Shoes</div>
+        <div class="card-desc">Zero-drop, flexible sole. Perfect for gym & HIIT workouts.</div>
+        <div class="card-footer">
+          <div>
+            <div class="card-price"><span class="price-main">₹3,999</span><span class="price-old">₹5,499</span></div>
+            <div class="price-comm">I earn ~₹400 per sale</div>
+          </div>
+          <a href="YOUR_AFFILIATE_LINK" class="buy-btn">Buy Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="tech">
+      <div class="card-image-wrap" style="background:linear-gradient(135deg,#0d1a2a,#0d2a1a)">
+        <div class="card-image">⌚</div>
+        <div class="card-badges"><span class="badge badge-new">✨ NEW</span></div>
+        <a href="#" class="card-reel-btn">▶ Watch Reel</a>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Fitness Tech</div>
+        <div class="card-name">FitTrack Smart Band</div>
+        <div class="card-desc">HR, SpO2, steps, sleep tracking. Budget-friendly. 7-day battery.</div>
+        <div class="card-footer">
+          <div>
+            <div class="card-price"><span class="price-main">₹1,799</span></div>
+            <div class="price-comm">I earn ~₹180 per sale</div>
+          </div>
+          <a href="YOUR_AFFILIATE_LINK" class="buy-btn">Buy Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="supplements">
+      <div class="card-image-wrap" style="background:linear-gradient(135deg,#2a1a0d,#1a0d0d)">
+        <div class="card-image">💊</div>
+        <div class="card-badges"><span class="badge badge-hot">🔥 HOT</span></div>
+        <a href="#" class="card-reel-btn">▶ Watch Reel</a>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Supplements</div>
+        <div class="card-name">Omega-3 Fish Oil Capsules</div>
+        <div class="card-desc">High-potency EPA & DHA. My daily non-negotiable for recovery.</div>
+        <div class="card-footer">
+          <div>
+            <div class="card-price"><span class="price-main">₹699</span></div>
+            <div class="price-comm">I earn ~₹70 per sale</div>
+          </div>
+          <a href="YOUR_AFFILIATE_LINK" class="buy-btn">Buy Now →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MID-PAGE ADSENSE -->
+  <div style="margin-top: 48px; display: grid; grid-template-columns: 1fr 300px; gap: 20px;">
+    <div class="adsense-slot" style="height:250px"></div>
+    <div class="adsense-slot ad-rectangle"></div>
+  </div>
+
+</section>
+
+<!-- REELS SECTION -->
+<section id="reels">
+  <div class="section-label">Watch & Shop</div>
+  <div class="section-title">My Latest Reels</div>
+  <p class="section-sub">Watch the reel, love the product, grab the link. That simple.</p>
+
+  <div class="reels-grid">
+    <div class="reel-card">
+      <div class="reel-emoji">🏋️</div>
+      <div class="reel-play-btn">▶</div>
+      <div class="reel-card-overlay">
+        <div class="reel-products-tag">🛒 3 products linked</div>
+        <div class="reel-card-title">Full Body Home Workout</div>
+        <div class="reel-card-views">👁 1.2M views</div>
+      </div>
+    </div>
+    <div class="reel-card" style="background:linear-gradient(180deg,#0d2a1a,#0d1a2a)">
+      <div class="reel-emoji">🥗</div>
+      <div class="reel-play-btn">▶</div>
+      <div class="reel-card-overlay">
+        <div class="reel-products-tag">🛒 2 products linked</div>
+        <div class="reel-card-title">Meal Prep Sunday Routine</div>
+        <div class="reel-card-views">👁 890K views</div>
+      </div>
+    </div>
+    <div class="reel-card" style="background:linear-gradient(180deg,#2a0d1a,#1a0d2a)">
+      <div class="reel-emoji">🌅</div>
+      <div class="reel-play-btn">▶</div>
+      <div class="reel-card-overlay">
+        <div class="reel-products-tag">🛒 5 products linked</div>
+        <div class="reel-card-title">My Morning Routine 2024</div>
+        <div class="reel-card-views">👁 2.4M views</div>
+      </div>
+    </div>
+    <div class="reel-card" style="background:linear-gradient(180deg,#1a1a0d,#0d1a1a)">
+      <div class="reel-emoji">💪</div>
+      <div class="reel-play-btn">▶</div>
+      <div class="reel-card-overlay">
+        <div class="reel-products-tag">🛒 4 products linked</div>
+        <div class="reel-card-title">Gym Bag Essentials</div>
+        <div class="reel-card-views">👁 650K views</div>
+      </div>
+    </div>
+    <div class="reel-card" style="background:linear-gradient(180deg,#0d0d2a,#1a0d1a)">
+      <div class="reel-emoji">😴</div>
+      <div class="reel-play-btn">▶</div>
+      <div class="reel-card-overlay">
+        <div class="reel-products-tag">🛒 3 products linked</div>
+        <div class="reel-card-title">Sleep & Recovery Hacks</div>
+        <div class="reel-card-views">👁 440K views</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-label">The Process</div>
+  <div class="section-title">How It Works</div>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-icon">📱</div>
+      <div class="step-title">See My Reel</div>
+      <div class="step-desc">You discover a product on my Instagram. Something catches your eye.</div>
+      <div class="step-connector">→</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-icon">🔗</div>
+      <div class="step-title">Visit This Site</div>
+      <div class="step-desc">Click the link in my bio or story. Find the exact product instantly.</div>
+      <div class="step-connector">→</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-icon">🛒</div>
+      <div class="step-title">Click & Buy</div>
+      <div class="step-desc">Hit "Buy Now" — you're taken to the official store to complete your order.</div>
+      <div class="step-connector">→</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-icon">🤝</div>
+      <div class="step-title">Everyone Wins</div>
+      <div class="step-desc">You get the product. I earn a small commission. No extra cost to you — ever.</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="newsletter">
+  <div class="newsletter-box">
+    <div class="section-label" style="justify-content:center">Stay in the Loop</div>
+    <div class="section-title" style="text-align:center">Get My Best Deals<br><span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Before Anyone Else</span></div>
+    <p class="section-sub" style="text-align:center;margin:16px auto 0">Exclusive discount codes, new product alerts, and reel drops — straight to your inbox. No spam.</p>
+    <div class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="your@email.com">
+      <button class="newsletter-btn">Get Deals 🔥</button>
+    </div>
+    <p class="newsletter-note">✅ No spam. Unsubscribe anytime. Already 12,000+ subscribers.</p>
+  </div>
+</section>
+
+<!-- ADSENSE FOOTER -->
+<div style="padding: 24px 48px; background: var(--bg2);">
+  <div class="adsense-slot ad-leaderboard"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">FitFinds</div>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">Disclaimer</a>
+    <a href="#">Privacy</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="footer-copy">© 2025 FitFinds · Affiliate links · Powered by passion 💪</div>
+</footer>
+
+<script>
+// ── CURSOR ──
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+(function animateRing() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+})();
+document.querySelectorAll('a, button, .filter-btn, .product-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%,-50%) scale(2)'; ring.style.width = '60px'; ring.style.height = '60px'; });
+  el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.width = '36px'; ring.style.height = '36px'; });
+});
+
+// ── LOADER ──
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('done'), 1900);
+});
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ── TYPEWRITER ──
+const words = ['My Top Picks.', 'Tried & Tested.', 'Used Daily.', 'Reel-Approved.'];
+let wi = 0, ci = 0, del = false;
+const el = document.getElementById('typewriter-line');
+function type() {
+  const word = words[wi];
+  if (!del) {
+    el.textContent = word.slice(0, ++ci);
+    if (ci === word.length) { del = true; setTimeout(type, 1800); return; }
+  } else {
+    el.textContent = word.slice(0, --ci);
+    if (ci === 0) { del = false; wi = (wi + 1) % words.length; }
+  }
+  setTimeout(type, del ? 60 : 100);
+}
+setTimeout(type, 2600);
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.product-card, .reel-card, .step').forEach(el => observer.observe(el));
+
+// ── FILTER ──
+function filterProducts(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(card => {
+    const show = cat === 'all' || card.dataset.cat === cat;
+    card.style.display = show ? 'block' : 'none';
+    if (show) { card.classList.remove('visible'); setTimeout(() => card.classList.add('visible'), 50); }
+  });
+}
+
+// ── NEWSLETTER ──
+document.querySelector('.newsletter-btn').addEventListener('click', function() {
+  const input = document.querySelector('.newsletter-input');
+  if (input.value && input.value.includes('@')) {
+    this.textContent = '✅ You\'re in!';
+    this.style.background = 'linear-gradient(135deg, #00e5c0, #0090ff)';
+    input.value = '';
+    input.placeholder = 'Thanks for subscribing!';
+  } else {
+    input.style.outline = '1px solid var(--accent)';
+    setTimeout(() => input.style.outline = 'none', 1200);
+  }
+});
+</script>
+</body>
+</html>
