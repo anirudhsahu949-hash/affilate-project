@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "cat": "",
+    "name": "PowerGrip Resistance Bands",
+    "price": "₹1,299",
+    "old": "₹1,899",
+    "badge": "Best Value",
+    "badgeCls": "b-hot",
+    "desc": "Compact 5-level resistance set for home workouts.",
+    "note": "Save ₹600",
+    "link": "https://your-affiliate-link.com",
+    "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
+  },
+  {
+    "id": 2,
+    "cat": "supplements",
+    "name": "Whey Protein Powder",
+    "price": "₹2,499",
+    "old": "",
+    "badge": "Top Rated",
+    "badgeCls": "b-new",
+    "desc": "25g protein per scoop.",
+    "note": "High quality",
+    "link": "https://amzn.to/4vTXv5H",
+    "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
+  }
+
+  {
+    "id": 1,
+    "cat": "wellness",
+    "name": "PowerGrip Resistance Bands",
+    "price": "₹1,299",
+    "old": "₹1,899",
+    "badge": "Best Value",
+    "badgeCls": "b-hot",
+    "desc": "Compact 5-level resistance set for home workouts.",
+    "note": "Save ₹600",
+    "link": "https://your-affiliate-link.com",
+    "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
+  },
+  {
+    "id": 2,
+    "cat": "supplements",
+    "name": "Whey Protein Powder",
+    "price": "₹2,499",
+    "old": "",
+    "badge": "Top Rated",
+    "badgeCls": "b-new",
+    "desc": "25g protein per scoop.",
+    "note": "High quality",
+    "link": "https://amzn.to/4vTXv5H",
+    "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
+  }
+
+  {
+    "id": 1,
+    "cat": "sport",
+    "name": "PowerGrip Resistance Bands",
+    "price": "₹1,299",
+    "old": "₹1,899",
+    "badge": "Best Value",
+    "badgeCls": "b-hot",
+    "desc": "Compact 5-level resistance set for home workouts.",
+    "note": "Save ₹600",
+    "link": "https://your-affiliate-link.com",
+    "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
+  },
+  {
+    "id": 2,
+    "cat": "supplements",
+    "name": "Whey Protein Powder",
+    "price": "₹2,499",
+    "old": "",
+    "badge": "Top Rated",
+    "badgeCls": "b-new",
+    "desc": "25g protein per scoop.",
+    "note": "High quality",
+    "link": "https://amzn.to/4vTXv5H",
+    "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
+  }
+]
