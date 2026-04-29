@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Filter - Best Price, Quality & Offers</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fffaf3;
+  --bg-soft: #f4fbf8;
+  --card: #ffffff;
+  --ink: #18221f;
+  --muted: #66736f;
+  --line: #e6ede8;
+  --green: #1d8f6f;
+  --green-dark: #12634e;
+  --coral: #ff6b5f;
+  --yellow: #ffd36a;
+  --blue: #4f8cff;
+  --shadow: 0 18px 50px rgba(25, 55, 45, 0.12);
+  --radius: 18px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Outfit", sans-serif;
+  overflow-x: hidden;
+}
+a { color: inherit; }
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 48px;
+  background: rgba(255, 250, 243, 0.88);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(230, 237, 232, 0.85);
+}
+
+.nav-logo {
+  font-family: "Syne", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--green-dark);
+  text-decoration: none;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-links a:hover { color: var(--green-dark); }
+
+.nav-cta,
+.btn-primary,
+.buy-btn,
+.newsletter-btn {
+  border: 0;
+  background: var(--green);
+  color: white;
+  border-radius: 999px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(29, 143, 111, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.nav-cta { padding: 10px 20px; font-size: 13px; white-space: nowrap; }
+.nav-cta:hover,
+.btn-primary:hover,
+.buy-btn:hover,
+.newsletter-btn:hover {
+  transform: translateY(-2px);
+  background: var(--green-dark);
+  box-shadow: 0 14px 32px rgba(29, 143, 111, 0.28);
+}
+
+#hero {
+  min-height: calc(100vh - 64px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+  align-items: center;
+  gap: 42px;
+  padding: 72px 48px 54px;
+  position: relative;
+  overflow: hidden;
+}
+
+#hero::before {
+  content: "";
+  position: absolute;
+  inset: auto -12% -18% 42%;
+  height: 420px;
+  background:
+    radial-gradient(circle at 25% 35%, rgba(255, 211, 106, 0.46), transparent 34%),
+    radial-gradient(circle at 70% 35%, rgba(79, 140, 255, 0.16), transparent 38%),
+    radial-gradient(circle at 52% 70%, rgba(29, 143, 111, 0.18), transparent 44%);
+  pointer-events: none;
+}
+
+.hero-content,
+.hero-panel { position: relative; z-index: 1; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid #d4eadf;
+  background: #effbf5;
+  color: var(--green-dark);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 22px;
+}
+
+.hero-badge span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--coral);
+}
+
+h1 {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(42px, 7vw, 86px);
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+  margin-bottom: 22px;
+}
+
+.highlight {
+  color: var(--green);
+}
+
+.hero-sub {
+  max-width: 650px;
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+.hero-sub strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 28px;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 26px;
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--green-dark);
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 560px;
+  margin-top: 34px;
+}
+
+.stat {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.stat-num {
+  font-family: "Syne", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--green-dark);
+}
+
+.stat-lbl {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.hero-panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.deal-card {
+  background: linear-gradient(135deg, #f2fff8, #fff4e8);
+  border: 1px solid #dbece3;
+  border-radius: 22px;
+  padding: 22px;
+}
+
+.deal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.deal-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  background: white;
+  border-radius: 16px;
+  font-size: 30px;
+  box-shadow: 0 12px 24px rgba(25, 55, 45, 0.08);
+}
+
+.deal-pill {
+  background: var(--yellow);
+  color: #4c3810;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.deal-card h2 {
+  margin-top: 24px;
+  font-family: "Syne", sans-serif;
+  font-size: 30px;
+  letter-spacing: -0.035em;
+}
+
+.deal-card p {
+  margin-top: 10px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.check-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(230, 237, 232, 0.8);
+  padding: 12px;
+  border-radius: 14px;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.check span {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green);
+  color: white;
+  flex: 0 0 auto;
+}
+
+.marquee-section {
+  overflow: hidden;
+  padding: 18px 0;
+  background: white;
+  border-block: 1px solid var(--line);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  animation: marquee 22s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-item {
+  color: var(--muted);
+  font-family: "Syne", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.marquee-item span { color: var(--coral); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+section { padding: 84px 48px; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+}
+
+.section-label::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: var(--coral);
+  border-radius: 2px;
+}
+
+.section-title {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(32px, 5vw, 54px);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+  margin-bottom: 14px;
+}
+
+.section-sub {
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 34px 0 30px;
+}
+
+.filter-btn {
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--muted);
+  padding: 11px 18px;
+  border-radius: 999px;
+  font-family: "Outfit", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  color: white;
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(25, 55, 45, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+
+.card-image-wrap {
+  min-height: 182px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  background: linear-gradient(135deg, #f0fff8, #fff1df);
+}
+
+.card-image { font-size: 64px; }
+
+.card-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.badge-hot { background: var(--coral); color: white; }
+.badge-new { background: var(--green); color: white; }
+.badge-sale { background: var(--yellow); color: #4d3b11; }
+
+.card-reel-btn {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: white;
+  color: var(--green-dark);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.card-body { padding: 18px; }
+.card-cat {
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.card-name {
+  font-family: "Syne", sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+}
+
+.card-desc {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 9px 0 16px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.price-main {
+  font-family: "Syne", sans-serif;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.price-old {
+  color: #98a39f;
+  text-decoration: line-through;
+  font-size: 14px;
+  margin-left: 6px;
+}
+
+.price-comm {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.buy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 98px;
+  min-height: 42px;
+  padding: 0 16px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+#reels,
+#newsletter {
+  background: var(--bg-soft);
+}
+
+.reels-grid,
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 36px;
+}
+
+.reel-card,
+.step {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: 0 8px 28px rgba(25, 55, 45, 0.08);
+}
+
+.reel-card {
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(160deg, white, #f2fff8);
+}
+
+.reel-emoji,
+.step-icon {
+  font-size: 36px;
+}
+
+.reel-card-title,
+.step-title {
+  font-family: "Syne", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  margin-top: 16px;
+}
+
+.reel-products-tag,
+.step-desc,
+.reel-card-views {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.reel-products-tag { color: var(--green); font-weight: 800; }
+.reel-card-views { margin-top: 10px; }
+
+.step-num {
+  font-family: "Syne", sans-serif;
+  color: rgba(29, 143, 111, 0.16);
+  font-size: 52px;
+  line-height: 1;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.newsletter-box {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsletter-box .section-label { justify-content: center; }
+.newsletter-box .section-sub { margin-inline: auto; }
+
+.newsletter-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 8px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 8px 28px rgba(25, 55, 45, 0.08);
+}
+
+.newsletter-input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  padding: 0 12px 0 16px;
+  color: var(--ink);
+  font: 500 15px "Outfit", sans-serif;
+}
+
+.newsletter-btn {
+  min-height: 46px;
+  padding: 0 22px;
+  white-space: nowrap;
+}
+
+.newsletter-note {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.adsense-slot {
+  min-height: 90px;
+  display: grid;
+  place-items: center;
+  max-width: 728px;
+  margin: 0 auto;
+  color: #8c9994;
+  border: 1px dashed #d5ded9;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ad-wrap { padding: 24px 48px; background: var(--bg-soft); }
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 36px 48px;
+  background: white;
+  border-top: 1px solid var(--line);
+}
+
+.footer-logo {
+  font-family: "Syne", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--green-dark);
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.footer-copy {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 980px) {
+  nav { padding: 12px 24px; }
+  .nav-links { display: none; }
+  #hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 54px 24px 42px;
+  }
+  .hero-panel { max-width: 640px; }
+  section { padding: 68px 24px; }
+  .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .reels-grid,
+  .steps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ad-wrap { padding-inline: 24px; }
+  footer { padding: 30px 24px; }
+}
+
+@media (max-width: 620px) {
+  nav {
+    align-items: center;
+    padding: 12px 16px;
+  }
+  .nav-logo { font-size: 21px; }
+  .nav-cta { padding: 9px 13px; font-size: 12px; }
+  #hero { padding: 34px 16px 34px; }
+  h1 {
+    font-size: clamp(39px, 13vw, 58px);
+    line-height: 1.01;
+    letter-spacing: -0.045em;
+  }
+  .hero-sub {
+    font-size: 16px;
+    line-height: 1.62;
+  }
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+  .hero-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .hero-panel {
+    padding: 14px;
+    border-radius: 22px;
+  }
+  .deal-card {
+    padding: 18px;
+    border-radius: 18px;
+  }
+  .deal-card h2 { font-size: 25px; }
+  section { padding: 56px 16px; }
+  .section-title {
+    font-size: 34px;
+    letter-spacing: -0.04em;
+  }
+  .section-sub {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .filter-bar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-inline: -16px;
+    padding-inline: 16px;
+    scrollbar-width: none;
+  }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .filter-btn {
+    flex: 0 0 auto;
+    padding: 10px 15px;
+  }
+  .products-grid,
+  .reels-grid,
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .card-image-wrap { min-height: 154px; }
+  .card-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .buy-btn {
+    width: 100%;
+    min-height: 46px;
+  }
+  .reel-card { min-height: 190px; }
+  .newsletter-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: 18px;
+    padding: 10px;
+  }
+  .newsletter-input {
+    min-height: 44px;
+    padding-inline: 12px;
+  }
+  .newsletter-btn { width: 100%; }
+  .ad-wrap { padding: 18px 16px; }
+  footer {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 28px 16px;
+  }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-logo">The Filter</a>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#reels">Reels</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#newsletter">Deals</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('products').scrollIntoView()">Shop Picks</button>
+</nav>
+
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span></span> Product filters for smart buyers</div>
+    <h1>We filter the <span class="highlight">best products</span> for you.</h1>
+    <p class="hero-sub">
+      We are here to filter the product for you: <strong>filter the best price, filter the best quality, and filter the best offers</strong> so you can buy with confidence.
+    </p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">View Filtered Picks</a>
+      <a href="#how" class="btn-secondary">How We Filter</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">120+</div>
+        <div class="stat-lbl">Products checked</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4.8</div>
+        <div class="stat-lbl">Average rating</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3x</div>
+        <div class="stat-lbl">Price checks</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <div class="deal-card">
+      <div class="deal-top">
+        <div class="deal-icon">🛍️</div>
+        <div class="deal-pill">Best offer found</div>
+      </div>
+      <h2>Quality, price, and offers in one quick shortlist.</h2>
+      <p>No more opening ten tabs or guessing which product is worth it. We compare the important things and keep the useful picks.</p>
+      <div class="check-list">
+        <div class="check"><span>✓</span> Best price filter</div>
+        <div class="check"><span>✓</span> Best quality filter</div>
+        <div class="check"><span>✓</span> Best offer filter</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item">Best Price <span>/</span></div>
+    <div class="marquee-item">Best Quality <span>/</span></div>
+    <div class="marquee-item">Best Offers <span>/</span></div>
+    <div class="marquee-item">Verified Picks <span>/</span></div>
+    <div class="marquee-item">Smart Filters <span>/</span></div>
+    <div class="marquee-item">Best Price <span>/</span></div>
+    <div class="marquee-item">Best Quality <span>/</span></div>
+    <div class="marquee-item">Best Offers <span>/</span></div>
+    <div class="marquee-item">Verified Picks <span>/</span></div>
+    <div class="marquee-item">Smart Filters <span>/</span></div>
+  </div>
+</div>
+
+<div class="ad-wrap">
+  <div class="adsense-slot">Google AdSense Advertisement</div>
+</div>
+
+<section id="products">
+  <div class="section-label">Filtered Picks</div>
+  <div class="section-title">Shop The Best Finds</div>
+  <p class="section-sub">Every product is arranged to help you quickly compare price, quality, and value before you buy.</p>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProducts('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProducts('fitness', this)">Fitness Gear</button>
+    <button class="filter-btn" onclick="filterProducts('supplements', this)">Supplements</button>
+    <button class="filter-btn" onclick="filterProducts('wellness', this)">Wellness</button>
+    <button class="filter-btn" onclick="filterProducts('activewear', this)">Activewear</button>
+    <button class="filter-btn" onclick="filterProducts('tech', this)">Fitness Tech</button>
+  </div>
+
+  <div class="products-grid" id="products-container">
+  <!-- Products will load here -->
+</div>
+</section>
+
+<section id="reels">
+  <div class="section-label">Watch & Compare</div>
+  <div class="section-title">Reel-Based Product Filters</div>
+  <p class="section-sub">Use every reel as a quick product shortlist instead of a confusing feed of random links.</p>
+  <div class="reels-grid">
+    <article class="reel-card">
+      <div class="reel-emoji">🏋️</div>
+      <div>
+        <div class="reel-products-tag">3 products filtered</div>
+        <div class="reel-card-title">Home Workout Gear</div>
+        <div class="reel-card-views">Best for compact spaces</div>
+      </div>
+    </article>
+    <article class="reel-card">
+      <div class="reel-emoji">🥗</div>
+      <div>
+        <div class="reel-products-tag">2 products filtered</div>
+        <div class="reel-card-title">Meal Prep Essentials</div>
+        <div class="reel-card-views">Best for daily routine</div>
+      </div>
+    </article>
+    <article class="reel-card">
+      <div class="reel-emoji">🌅</div>
+      <div>
+        <div class="reel-products-tag">5 products filtered</div>
+        <div class="reel-card-title">Morning Routine Picks</div>
+        <div class="reel-card-views">Best quality shortlist</div>
+      </div>
+    </article>
+    <article class="reel-card">
+      <div class="reel-emoji">💪</div>
+      <div>
+        <div class="reel-products-tag">4 products filtered</div>
+        <div class="reel-card-title">Gym Bag Essentials</div>
+        <div class="reel-card-views">Best offer shortlist</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="how">
+  <div class="section-label">The Process</div>
+  <div class="section-title">How The Filter Works</div>
+  <p class="section-sub">A simple buying flow made for people who want fewer choices, better choices, and clearer deals.</p>
+  <div class="steps-grid">
+    <article class="step">
+      <div class="step-num">01</div>
+      <div class="step-icon">🔎</div>
+      <div class="step-title">We Search</div>
+      <div class="step-desc">Products are collected from reels, offers, and popular shopping categories.</div>
+    </article>
+    <article class="step">
+      <div class="step-num">02</div>
+      <div class="step-icon">⚖️</div>
+      <div class="step-title">We Compare</div>
+      <div class="step-desc">Price, quality, ratings, and value are checked before anything is listed.</div>
+    </article>
+    <article class="step">
+      <div class="step-num">03</div>
+      <div class="step-icon">🏷️</div>
+      <div class="step-title">We Filter</div>
+      <div class="step-desc">Only the best price, best quality, and best offer picks stay on the page.</div>
+    </article>
+    <article class="step">
+      <div class="step-num">04</div>
+      <div class="step-icon">🛒</div>
+      <div class="step-title">You Buy</div>
+      <div class="step-desc">Pick the product you like and go directly to the store to complete the order.</div>
+    </article>
+  </div>
+</section>
+
+<section id="newsletter">
+  <div class="newsletter-box">
+    <div class="section-label">Deal Alerts</div>
+    <div class="section-title">Get The Best Offers First</div>
+    <p class="section-sub">Join the list for filtered deals, price drops, and quality picks before they disappear.</p>
+    <div class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="your@email.com">
+      <button class="newsletter-btn">Get Deals</button>
+    </div>
+    <p class="newsletter-note">No spam. Only filtered offers worth checking.</p>
+  </div>
+</section>
+
+<div class="ad-wrap">
+  <div class="adsense-slot">Google AdSense Advertisement</div>
+</div>
+
+<footer>
+  <div class="footer-logo">The Filter</div>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">Disclaimer</a>
+    <a href="#">Privacy</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 The Filter. Affiliate links may earn commission.</div>
+</footer>
+
+<script>
+// FILTER FUNCTION (keep this)
+function filterProducts(cat, btn) {
+  document.querySelectorAll(".filter-btn").forEach(button => button.classList.remove("active"));
+  btn.classList.add("active");
+
+  document.querySelectorAll(".product-card").forEach(card => {
+    const show = cat === "all" || card.dataset.cat === cat;
+    card.style.display = show ? "" : "none";
+  });
+}
+
+// LOAD PRODUCTS FROM JSON
+fetch("products.json")
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById("products-container");
+
+    data.forEach(product => {
+      const badgeClass =
+        product.badge === "Best Value" ? "badge-hot" :
+        product.badge === "Top Rated" ? "badge-new" :
+        "badge-sale";
+
+      container.innerHTML += `
+        <article class="product-card" data-cat="${product.category}">
+          <div class="card-image-wrap">
+            <div class="card-image">${product.emoji}</div>
+            <div class="card-badges">
+              <span class="badge ${badgeClass}">${product.badge}</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-cat">${product.category}</div>
+            <div class="card-name">${product.name}</div>
+            <div class="card-desc">${product.desc}</div>
+            <div class="card-footer">
+              <div>
+                <div>
+                  <span class="price-main">${product.price}</span>
+                  ${product.oldPrice ? `<span class="price-old">${product.oldPrice}</span>` : ""}
+                </div>
+                <div class="price-comm">${product.note || ""}</div>
+              </div>
+              <a href="${product.link}" target="_blank" class="buy-btn">Buy Now</a>
+            </div>
+          </div>
+        </article>
+      `;
+    });
+  })
+  .catch(err => {
+    console.error("Error loading products:", err);
+  });
+
+// NEWSLETTER FIX (safe)
+const btn = document.querySelector(".newsletter-btn");
+if (btn) {
+  btn.addEventListener("click", function () {
+    const input = document.querySelector(".newsletter-input");
+    if (input.value && input.value.includes("@")) {
+      this.textContent = "You're in";
+      input.value = "";
+      input.placeholder = "Thanks for subscribing";
+    } else {
+      input.focus();
+      input.style.outline = "2px solid red";
+      setTimeout(() => input.style.outline = "0", 1200);
+    }
+  });
+}
+</script>
+</body>
+</html>
