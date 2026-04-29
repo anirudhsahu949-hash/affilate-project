@@ -1,33 +1,33 @@
 [
   {
     "id": 1,
-    "cat": "",
-    "name": "PowerGrip Resistance Bands",
-    "price": "₹1,299",
+    "cat": "men-shirt",
+    "name": "Cotton Big/Buffalo Checks",
+    "price": "₹747",
     "old": "₹1,899",
     "badge": "Best Value",
     "badgeCls": "b-hot",
-    "desc": "Compact 5-level resistance set for home workouts.",
+    "desc": "GHPC 100% Cotton Big/Buffalo Checks Half Sleeves Regular Fit Formal Shirt for Men",
     "note": "Save ₹600",
-    "link": "https://your-affiliate-link.com",
-    "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
+    "link": "https://amzn.to/4mWclUW",
+    "image": "https://m.media-amazon.com/images/I/91Xyhca3RGL._SY679_.jpg"
   },
   {
     "id": 2,
-    "cat": "supplements",
-    "name": "Whey Protein Powder",
-    "price": "₹2,499",
-    "old": "",
+    "cat": "men-shirt",
+    "name": "Checkered Half Sleeves",
+    "price": "₹747",
+    "old": "1900",
     "badge": "Top Rated",
     "badgeCls": "b-new",
-    "desc": "25g protein per scoop.",
+    "desc": "GHPC 100% Cotton Checkered Half Sleeves Regular Fit Formal Shirt for Men",
     "note": "High quality",
     "link": "https://amzn.to/4vTXv5H",
-    "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
+    "image": "https://m.media-amazon.com/images/I/91pwHO598jL._SY679_.jpg"
   },
 
   {
-    "id": 1,
+    "id": 3,
     "cat": "wellness",
     "name": "PowerGrip Resistance Bands",
     "price": "₹1,299",
@@ -40,21 +40,21 @@
     "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
   },
   {
-    "id": 2,
-    "cat": "supplements",
-    "name": "Whey Protein Powder",
-    "price": "₹2,499",
+    "id": 4,
+    "cat": "watch",
+    "name": "Round Dial Analog Watch for Men",
+    "price": "₹499",
     "old": "",
     "badge": "Top Rated",
     "badgeCls": "b-new",
-    "desc": "25g protein per scoop.",
+    "desc": "Acnos Minimalist Square & Round Dial Analog Watch for Men – Slim Case Design with Day & Date Display, Stainless Steel Strap",
     "note": "High quality",
     "link": "https://amzn.to/4vTXv5H",
-    "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
+    "image": "https://m.media-amazon.com/images/I/81zzN5O8w0L._SX679_.jpg"
   },
 
   {
-    "id": 1,
+    "id": 5,
     "cat": "sport",
     "name": "PowerGrip Resistance Bands",
     "price": "₹1,299",
@@ -67,7 +67,7 @@
     "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
   },
   {
-    "id": 2,
+    "id": 6,
     "cat": "supplements",
     "name": "Whey Protein Powder",
     "price": "₹2,499",
