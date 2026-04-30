@@ -10,7 +10,7 @@
     "desc": "GHPC 100% Cotton Big/Buffalo Checks Half Sleeves Regular Fit Formal Shirt for Men",
     "note": "Save ₹600",
     "link": "https://amzn.to/4mWclUW",
-    "image": "C:/affilate-project/image"
+    "image": "https://m.media-amazon.com/images/I/61H1HxfTAUL._SY500_.jpg"
   },
   {
     "id": 2,
@@ -50,7 +50,7 @@
     "desc": "Acnos Minimalist Square & Round Dial Analog Watch for Men – Slim Case Design with Day & Date Display, Stainless Steel Strap",
     "note": "High quality",
     "link": "https://amzn.to/4vTXv5H",
-    "image": "C:/affilate-project/image/product-one.png"
+    "image": "https://m.media-amazon.com/images/I/61H1HxfTAUL._SY500_.jpg/product-one.png"
   },
 
   {
@@ -90,6 +90,99 @@
     "desc": "DEELMO Men’s Stylish Cotton Blend Casual Shirt || Full Sleeve Button-Down Shirt with Dual Flap Pockets || Comfortable Breathable Fabric || Perfect for Casual Office and Outing Wear",
     "note": "High quality",
     "link": "https://amzn.to/4mZJCPh",
-    "image": "C:/affilate-project/image"
+    "image": "https://m.media-amazon.com/images/I/61H1HxfTAUL._SY500_.jpg"
+  }
+  ,{
+    "id": 1,
+    "cat": "men-shirt",
+    "name": "Cotton Big/Buffalo Checks",
+    "price": "₹747",
+    "old": "₹1,899",
+    "badge": "amezon",
+    "badgeCls": "b-hot",
+    "desc": "GHPC 100% Cotton Big/Buffalo Checks Half Sleeves Regular Fit Formal Shirt for Men",
+    "note": "Save ₹600",
+    "link": "https://amzn.to/4mWclUW",
+    "image": "https://m.media-amazon.com/images/I/61H1HxfTAUL._SY500_.jpg"
+  },
+  {
+    "id": 2,
+    "cat": "men-shirt",
+    "name": "Checkered Half Sleeves",
+    "price": "₹747",
+    "old": "1900",
+    "badge": "amezon",
+    "badgeCls": "b-new",
+    "desc": "GHPC 100% Cotton Checkered Half Sleeves Regular Fit Formal Shirt for Men",
+    "note": "High quality",
+    "link": "https://amzn.to/4vTXv5H",
+    "image": "https://m.media-amazon.com/images/I/91pwHO598jL._SY679_.jpg"
+  },
+
+  {
+    "id": 3,
+    "cat": "wellness",
+    "name": "PowerGrip Resistance Bands",
+    "price": "₹1,299",
+    "old": "₹1,899",
+    "badge": "amezon",
+    "badgeCls": "b-hot",
+    "desc": "Compact 5-level resistance set for home workouts.",
+    "note": "Save ₹600",
+    "link": "https://your-affiliate-link.com",
+    "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
+  },
+  {
+    "id": 4,
+    "cat": "watch",
+    "name": "Round Dial Analog Watch for Men",
+    "price": "₹499",
+    "old": "",
+    "badge": "Top Rated",
+    "badgeCls": "b-new",
+    "desc": "Acnos Minimalist Square & Round Dial Analog Watch for Men – Slim Case Design with Day & Date Display, Stainless Steel Strap",
+    "note": "High quality",
+    "link": "https://amzn.to/4vTXv5H",
+    "image": "https://m.media-amazon.com/images/I/61H1HxfTAUL._SY500_.jpg/product-one.png"
+  },
+
+  {
+    "id": 5,
+    "cat": "sport",
+    "name": "PowerGrip Resistance Bands",
+    "price": "₹1,299",
+    "old": "₹1,899",
+    "badge": "Best Value",
+    "badgeCls": "b-hot",
+    "desc": "Compact 5-level resistance set for home workouts.",
+    "note": "Save ₹600",
+    "link": "https://your-affiliate-link.com",
+    "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
+  },
+  {
+    "id": 6,
+    "cat": "men-shirt",
+    "name": "Full Sleeve | Summer - Regular Fit",
+    "price": "₹2,499",
+    "old": "",
+    "badge": "Top Rated",
+    "badgeCls": "b-new",
+    "desc": "Symbol Men's Cotton Shirt | Casual | Plain | Full Sleeve | Summer - Regular Fit (Available in Plus Sizes)",
+    "note": "High quality",
+    "link": "https://amzn.to/4n11BEL",
+    "image": "https://m.media-amazon.com/images/I/71nG3R1OPeL._SX522_.jpg"
+  },
+  {
+    "id": 7,
+    "cat": "cloth",
+    "name": "Cotton Blend Casual Shirt |",
+    "price": "₹495",
+    "old": "",
+    "badge": "Top Rated",
+    "badgeCls": "b-new",
+    "desc": "DEELMO Men’s Stylish Cotton Blend Casual Shirt || Full Sleeve Button-Down Shirt with Dual Flap Pockets || Comfortable Breathable Fabric || Perfect for Casual Office and Outing Wear",
+    "note": "High quality",
+    "link": "https://amzn.to/4mZJCPh",
+    "image": "https://m.media-amazon.com/images/I/61H1HxfTAUL._SY500_.jpg"
   }
 ]
