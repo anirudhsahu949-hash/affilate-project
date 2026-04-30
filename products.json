@@ -68,15 +68,28 @@
   },
   {
     "id": 6,
-    "cat": "supplements",
-    "name": "Whey Protein Powder",
+    "cat": "men-shirt",
+    "name": "Full Sleeve | Summer - Regular Fit",
     "price": "₹2,499",
     "old": "",
     "badge": "Top Rated",
     "badgeCls": "b-new",
-    "desc": "25g protein per scoop.",
+    "desc": "Symbol Men's Cotton Shirt | Casual | Plain | Full Sleeve | Summer - Regular Fit (Available in Plus Sizes)",
     "note": "High quality",
-    "link": "https://amzn.to/4vTXv5H",
-    "image": "https://th.bing.com/th/id/OIP.5lfJhCkB-JX7qWHAl2AvNgHaHa"
+    "link": "https://amzn.to/4n11BEL",
+    "image": "https://m.media-amazon.com/images/I/71nG3R1OPeL._SX522_.jpg"
+  },
+  {
+    "id": 7,
+    "cat": "cloth",
+    "name": "Cotton Blend Casual Shirt |",
+    "price": "₹495",
+    "old": "",
+    "badge": "Top Rated",
+    "badgeCls": "b-new",
+    "desc": "DEELMO Men’s Stylish Cotton Blend Casual Shirt || Full Sleeve Button-Down Shirt with Dual Flap Pockets || Comfortable Breathable Fabric || Perfect for Casual Office and Outing Wear",
+    "note": "High quality",
+    "link": "https://amzn.to/4mZJCPh",
+    "image": "https://m.media-amazon.com/images/I/61BYu06c-4L._SX466_.jpg"
   }
 ]
