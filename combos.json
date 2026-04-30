@@ -1,0 +1,18 @@
+[
+  {
+    "id": 101,
+    "name": "Gym Starter Combo",
+    "items": [1, 6, 11],
+    "price": "₹3,199",
+    "old": "₹4,500",
+    "tag": "🔥 Best Combo"
+  },
+  {
+    "id": 102,
+    "name": "Activewear Combo",
+    "items": [4, 10],
+    "price": "₹1,199",
+    "old": "₹1,700",
+    "tag": "💥 Trending"
+  }
+]

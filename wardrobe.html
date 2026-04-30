@@ -17,8 +17,8 @@
   --ink2:      #3d4d47;
   --muted:     #7d8c85;
   --line:      #e0d9d0;
-  --g:         #0f7a62;
-  --g2:         #FF9900;
+  --g:         #000000;
+  --g2:         #2874F0;
   --g-glow:    rgba(15,122,98,.18);
   --coral:     #ff5a45;
   --amber:     #f5b638;
@@ -168,6 +168,8 @@ body::before{
   border-radius:999px;padding:6px 12px;
   font-size:12px;font-weight:700;color:var(--ink2);
 }
+
+
 
 /* ═══════════════════════════════════════════════════════
    WARDROBE GRID
@@ -631,13 +633,24 @@ body::before{
   <div class="ward-count-pill" id="ward-count">0 items</div>
 </div>
 
+<div class="ward-head">
+  <div>
+    <div class="ward-title">🔥 Combo Deals</div>
+    <div class="ward-sub">Best outfit & bundle picks</div>
+  </div>
+</div>
+
+<div id="combo-container" class="prod-grid"></div>
+
+
+
 <!-- ── WARDROBE GRID ─────────────────────────────── -->
 <div id="wardrobe-grid"></div>
 
 <!-- ── FOOTER ────────────────────────────────────── -->
 <div class="footer">
   <b>The Filter</b> — Best price · Best quality · Best offers<br>
-  © 2026 · Affiliate links may earn commission
+  © 2026 · Affiliate links of amezon & filpkart.
 </div>
 
 <!-- ── PICKS PANEL ───────────────────────────────── -->
@@ -698,139 +711,39 @@ body::before{
      JAVASCRIPT
 ═══════════════════════════════════════════════════════ -->
 <script>
-/* ── PRODUCT DATA ─────────────────────────────────── */
-/* Replace this array with a fetch("products.json") call for production */
-const PRODUCTS = [
-  {
-    id:1, cat:"fitness",
-    name:"Adjustable Dumbbell Set",
-    emoji:"🏋️",
-    badge:"Best Value", badgeCls:"b-hot",
-    price:2499, priceStr:"₹2,499", old:"₹3,800",
-    note:"↓34% off today",
-    desc:"Space-saving 2–24kg adjustable set. Perfect for full home workouts without buying multiple dumbbells.",
-    link:"#"
-  },
-  {
-    id:2, cat:"supplements",
-    name:"Whey Protein 2kg",
-    emoji:"💊",
-    badge:"Top Rated", badgeCls:"b-new",
-    price:1899, priceStr:"₹1,899", old:"₹2,500",
-    note:"★ 4.9 rating",
-    desc:"25g protein per serving. Chocolate & vanilla. No artificial fillers, easy digestion, mixes clean.",
-    link:"#"
-  },
-  {
-    id:3, cat:"wellness",
-    name:"Yoga Mat Pro",
-    emoji:"🧘",
-    badge:"Sale", badgeCls:"b-sale",
-    price:899, priceStr:"₹899", old:"₹1,499",
-    note:"Free shipping",
-    desc:"6mm thick anti-slip eco TPE. Includes carry strap. Non-toxic, odour-free. Works on any surface.",
-    link:"#"
-  },
-  {
-    id:4, cat:"activewear",
-    name:"Dry-Fit Training Tee",
-    emoji:"👕",
-    badge:"Best Value", badgeCls:"b-hot",
-    price:499, priceStr:"₹499", old:"",
-    note:"Best price",
-    desc:"Moisture-wicking 100% polyester. Flatlock seams prevent chafing. Available in 6 colours & all sizes.",
-    link:"#"
-  },
-  {
-    id:5, cat:"tech",
-    name:"Smart Fitness Band",
-    emoji:"⌚",
-    badge:"Top Rated", badgeCls:"b-new",
-    price:1299, priceStr:"₹1,299", old:"₹2,100",
-    note:"↓38% off",
-    desc:"Heart rate, SpO2, sleep tracking. 10-day battery. AMOLED display. Waterproof IP68.",
-    link:"#"
-  },
-  {
-    id:6, cat:"fitness",
-    name:"Resistance Bands Set",
-    emoji:"🔴",
-    badge:"Sale", badgeCls:"b-sale",
-    price:349, priceStr:"₹349", old:"₹699",
-    note:"50% off",
-    desc:"5 resistance levels. Fabric-coated, no snap risk. Includes carry pouch. Great for glutes & arms.",
-    link:"#"
-  },
-  {
-    id:7, cat:"supplements",
-    name:"Creatine Monohydrate 500g",
-    emoji:"🧪",
-    badge:"Best Value", badgeCls:"b-hot",
-    price:699, priceStr:"₹699", old:"₹1,100",
-    note:"Best price",
-    desc:"Pure micronised creatine. Unflavoured, mixes clear. 100 servings. Third-party lab tested.",
-    link:"#"
-  },
-  {
-    id:8, cat:"wellness",
-    name:"Cold Press Juicer",
-    emoji:"🥤",
-    badge:"Top Rated", badgeCls:"b-new",
-    price:3499, priceStr:"₹3,499", old:"₹5,000",
-    note:"★ 4.8",
-    desc:"Slow-press 80rpm motor. BPA-free parts. Quiet operation. Preserves nutrients & enzymes.",
-    link:"#"
-  },
-  {
-    id:9, cat:"tech",
-    name:"Wireless Earbuds Sport",
-    emoji:"🎧",
-    badge:"Sale", badgeCls:"b-sale",
-    price:1199, priceStr:"₹1,199", old:"₹2,499",
-    note:"↓52% off",
-    desc:"IP55 waterproof. 30hr total battery. Secure sport-fit ear hooks. 15min fast charge = 2hr play.",
-    link:"#"
-  },
-  {
-    id:10, cat:"activewear",
-    name:"Compression Leggings",
-    emoji:"🩱",
-    badge:"Best Value", badgeCls:"b-hot",
-    price:799, priceStr:"₹799", old:"₹1,200",
-    note:"↓33% off",
-    desc:"4-way stretch squat-proof fabric. High waist, hidden pocket. Available in 8 colours.",
-    link:"#"
-  },
-  {
-    id:11, cat:"fitness",
-    name:"Foam Roller Pro",
-    emoji:"🟠",
-    badge:"Sale", badgeCls:"b-sale",
-    price:549, priceStr:"₹549", old:"₹899",
-    note:"↓39% off",
-    desc:"High-density EVA foam. Textured surface for deep tissue. Full-body recovery in 10 mins.",
-    link:"#"
-  },
-  {
-    id:12, cat:"supplements",
-    name:"Multivitamin Daily 60 tabs",
-    emoji:"💊",
-    badge:"Top Rated", badgeCls:"b-new",
-    price:449, priceStr:"₹449", old:"₹699",
-    note:"Best quality",
-    desc:"23 essential vitamins & minerals. No artificial colours. Once-a-day formula. 2 months supply.",
-    link:"#"
-  },
-];
+/* ── DATA ─────────────────────────────────────────── */
+let PRODUCTS = [];
+let COMBOS = [];
 
-/* ── STATE ────────────────────────────────────────── */
-let picks = new Set();       // Set of product ids
+/* ── LOAD DATA ───────────────────────────────────── */
+async function loadProducts(){
+  try{
+    const res = await fetch("products.json");
+    PRODUCTS = await res.json();
+  }catch(err){
+    console.error("Failed to load products", err);
+    PRODUCTS = [];
+  }
+}
+
+async function loadCombos(){
+  try{
+    const res = await fetch("combos.json");
+    COMBOS = await res.json();
+  }catch(err){
+    console.error("Failed to load combos", err);
+    COMBOS = [];
+  }
+}
+
+/* ── STATE ───────────────────────────────────────── */
+let picks = new Set();
 let activeCat = "all";
 let searchQuery = "";
 let sheetProductId = null;
 let panelOpen = false;
 
-/* ── FILTER LOGIC ─────────────────────────────────── */
+/* ── FILTER PRODUCTS ─────────────────────────────── */
 function filteredProducts(){
   return PRODUCTS.filter(p=>{
     const matchCat = activeCat === "all" || p.cat === activeCat;
@@ -841,298 +754,203 @@ function filteredProducts(){
   });
 }
 
-/* ── RENDER GRID ──────────────────────────────────── */
+/* ── RENDER PRODUCTS ─────────────────────────────── */
 function renderGrid(){
   const grid = document.getElementById("wardrobe-grid");
   const prods = filteredProducts();
   const countEl = document.getElementById("ward-count");
 
-  countEl.textContent = prods.length + " item" + (prods.length!==1?"s":"");
+  countEl.textContent = `${prods.length} item${prods.length!==1?"s":""}`;
 
   if(prods.length === 0){
     grid.innerHTML = `
       <div id="empty-state">
         <div class="empty-ico">🔍</div>
-        <p>No products match your search.<br>Try a different filter.</p>
+        <p>No products match your search.</p>
       </div>`;
     return;
   }
 
-  grid.innerHTML = prods.map((p, i) => {
+  grid.innerHTML = prods.map((p,i)=>{
     const isPicked = picks.has(p.id);
+
     return `
-    <article class="prod-card${isPicked?" picked":""}"
+    <article class="prod-card ${isPicked?"picked":""}"
       data-id="${p.id}"
-      style="animation-delay:${Math.min(i*.06,.4)}s"
-      onclick="handleCardClick(event, ${p.id})"
-      role="button" tabindex="0"
-      aria-label="${p.name}">
+      onclick="handleCardClick(event, ${p.id})">
+
       <div class="card-img-wrap">
-        <div class="card-emoji">${p.emoji}</div>
-        <span class="card-badge ${p.badgeCls}">${p.badge}</span>
-        <div class="pick-check" aria-hidden="true">${isPicked?"✓":""}</div>
+        <div class="card-emoji">${p.emoji || "🛍️"}</div>
+        <span class="card-badge ${p.badgeCls || ""}">${p.badge || ""}</span>
+        <div class="pick-check">${isPicked?"✓":""}</div>
       </div>
+
       <div class="card-body">
         <div class="card-cat">${p.cat}</div>
         <div class="card-name">${p.name}</div>
+
         <div class="card-price-row">
           <div>
             <span class="card-price">${p.priceStr}</span>
-            ${p.old?`<span class="card-old"> ${p.old}</span>`:""}
+            ${p.old ? `<span class="card-old">${p.old}</span>` : ""}
           </div>
-          <button class="quick-btn" onclick="event.stopPropagation();openSheet(${p.id})" aria-label="Quick view">
-            ↗
-          </button>
+          <button class="quick-btn" onclick="event.stopPropagation();openSheet(${p.id})">↗</button>
         </div>
       </div>
     </article>`;
   }).join("");
 }
 
-/* tap logic: first tap = pick, rapid second tap = quick view */
-let lastTap = {id:null, t:0};
-function handleCardClick(e, id){
-  addRipple(e);
-  const now = Date.now();
-  if(lastTap.id === id && now - lastTap.t < 400){
-    openSheet(id);
-    lastTap = {id:null, t:0};
+/* ── RENDER COMBOS (SEPARATE CONTAINER) ───────────── */
+function renderCombos(){
+  const el = document.getElementById("combo-container");
+
+  if(!el) return;
+
+  if(COMBOS.length === 0){
+    el.innerHTML = "";
     return;
   }
-  lastTap = {id, t:now};
-  togglePick(id);
+
+  el.innerHTML = COMBOS.map(combo=>{
+    const items = combo.items.map(id=>{
+      const p = PRODUCTS.find(x=>x.id===id);
+      return p ? `<span>${p.emoji}</span>` : "";
+    }).join("");
+
+    return `
+    <div class="prod-card">
+      <div class="card-img-wrap" style="display:flex;gap:6px;justify-content:center;align-items:center;font-size:28px;">
+        ${items}
+      </div>
+
+      <div class="card-body">
+        <div class="card-cat">Combo</div>
+        <div class="card-name">${combo.name}</div>
+
+        <div class="card-price-row">
+          <div>
+            <span class="card-price">${combo.price}</span>
+            ${combo.old ? `<span class="card-old">${combo.old}</span>` : ""}
+          </div>
+          <button class="quick-btn" onclick="buyCombo(${combo.id})">🛒</button>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
 }
 
-function addRipple(e){
-  const card = e.currentTarget;
-  const rect = card.getBoundingClientRect();
-  const size = Math.max(rect.width, rect.height) * .7;
-  const x = (e.clientX||e.touches?.[0]?.clientX||rect.left+rect.width/2) - rect.left - size/2;
-  const y = (e.clientY||e.touches?.[0]?.clientY||rect.top+rect.height/2) - rect.top - size/2;
-  const r = document.createElement("div");
-  r.className = "ripple";
-  r.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px;`;
-  card.appendChild(r);
-  setTimeout(()=>r.remove(), 600);
+function buyCombo(id){
+  const combo = COMBOS.find(c=>c.id===id);
+  if(!combo) return;
+
+  showToast("Opening combo deal 🔥","🛒","green");
+
+  // window.open(combo.link, "_blank");
 }
 
-/* ── TOGGLE PICK ──────────────────────────────────── */
+/* ── PICK SYSTEM ─────────────────────────────────── */
 function togglePick(id){
-  const card = document.querySelector(`.prod-card[data-id="${id}"]`);
   const p = PRODUCTS.find(x=>x.id===id);
   if(!p) return;
 
   if(picks.has(id)){
     picks.delete(id);
-    if(card){
-      card.classList.remove("picked","picking");
-      card.querySelector(".pick-check").textContent = "";
-    }
     showToast(`Removed: ${p.name}`,"✕","red");
-  } else {
+  }else{
     picks.add(id);
-    if(card){
-      card.classList.add("picked","picking");
-      card.querySelector(".pick-check").textContent = "✓";
-      setTimeout(()=>card.classList.remove("picking"),450);
-    }
     showToast(`Added: ${p.name}`,"✓","green");
-    // haptic-like flash
-    if(navigator.vibrate) navigator.vibrate([12]);
   }
 
+  renderGrid();
   renderPicksPanel();
   updateNav();
-  updateComboBanner();
-  if(sheetProductId === id) updateSheetPickBtn();
 }
 
-/* ── PICKS PANEL ──────────────────────────────────── */
+/* ── PICKS PANEL ─────────────────────────────────── */
 function renderPicksPanel(){
   const strip = document.getElementById("picks-strip");
-  const pickedProds = PRODUCTS.filter(p=>picks.has(p.id));
+  const picked = PRODUCTS.filter(p=>picks.has(p.id));
 
-  if(pickedProds.length === 0){
+  if(picked.length === 0){
     hidePanel();
     return;
   }
 
-  strip.innerHTML = pickedProds.map(p=>`
+  strip.innerHTML = picked.map(p=>`
     <div class="pick-chip">
       <div class="pick-chip-img">
         <span>${p.emoji}</span>
-        <button class="pick-chip-remove" onclick="togglePick(${p.id})" aria-label="Remove ${p.name}">✕</button>
+        <button class="pick-chip-remove" onclick="togglePick(${p.id})">✕</button>
       </div>
       <div class="pick-chip-price">${p.priceStr}</div>
     </div>
   `).join("");
 
-  document.getElementById("panel-count-label").textContent = `(${picks.size})`;
-
-  const total = pickedProds.reduce((s,p)=>s+p.price,0);
-  document.getElementById("panel-total").textContent =
-    "₹" + total.toLocaleString("en-IN");
+  const total = picked.reduce((s,p)=>s+p.price,0);
+  document.getElementById("panel-total").textContent = "₹" + total;
 
   showPanel();
 }
 
+/* ── PANEL ───────────────────────────────────────── */
 function showPanel(){
-  const panel = document.getElementById("picks-panel");
-  panel.classList.add("visible");
-  panelOpen = true;
+  document.getElementById("picks-panel").classList.add("visible");
 }
 function hidePanel(){
-  const panel = document.getElementById("picks-panel");
-  panel.classList.remove("visible");
-  panelOpen = false;
-}
-function togglePanel(){
-  if(picks.size === 0){ showToast("Tap products to add picks!","👆","amber"); return; }
-  panelOpen ? hidePanel() : showPanel();
-}
-function clearAll(){
-  picks.clear();
-  document.querySelectorAll(".prod-card.picked").forEach(c=>{
-    c.classList.remove("picked");
-    c.querySelector(".pick-check").textContent = "";
-  });
-  renderPicksPanel();
-  updateNav();
-  updateComboBanner();
-  showToast("Cleared all picks","🗑️");
-}
-function openCart(){
-  showPanel();
-  document.getElementById("picks-panel").scrollIntoView({behavior:"smooth"});
+  document.getElementById("picks-panel").classList.remove("visible");
 }
 
-/* ── NAV COUNTER ──────────────────────────────────── */
+/* ── NAV COUNT ───────────────────────────────────── */
 function updateNav(){
   const el = document.getElementById("picks-count");
-  if(picks.size > 0){
+  if(picks.size){
     el.textContent = picks.size;
     el.classList.add("show");
-  } else {
+  }else{
     el.classList.remove("show");
   }
 }
 
-/* ── COMBO BANNER ─────────────────────────────────── */
-function updateComboBanner(){
-  const banner = document.getElementById("combo-banner");
-  const n = picks.size;
-  if(n >= 2){
-    banner.classList.add("show");
-    document.getElementById("combo-title").textContent =
-      n >= 4 ? `🔥 Amazing combo! ${n} picks, best price guaranteed` :
-      n === 3 ? `Great set of ${n}! Compare bundle prices now` :
-      `Pick ${4-n} more for the best bundle deal`;
-    document.getElementById("combo-sub").textContent =
-      n >= 4 ? "Tap 'See Deal' to get combined discount" :
-      "Keep adding for a bigger saving";
-  } else {
-    banner.classList.remove("show");
-  }
-}
+/* ── SEARCH ─────────────────────────────────────── */
+document.getElementById("search-input").addEventListener("input",e=>{
+  searchQuery = e.target.value.toLowerCase();
+  renderGrid();
+});
 
-/* ── QUICK VIEW SHEET ─────────────────────────────── */
-function openSheet(id){
-  const p = PRODUCTS.find(x=>x.id===id);
-  if(!p) return;
-  sheetProductId = id;
-
-  const imgEl = document.getElementById("s-img");
-  imgEl.innerHTML = `<span style="font-size:90px;position:relative;z-index:1">${p.emoji}</span>`;
-
-  document.getElementById("s-cat").textContent = p.cat + " · " + p.badge;
-  document.getElementById("s-name").textContent = p.name;
-  document.getElementById("s-desc").textContent = p.desc;
-  document.getElementById("s-price").textContent = p.priceStr;
-  document.getElementById("s-old").textContent = p.old || "";
-  document.getElementById("s-link").href = p.link;
-
-  // calc savings
-  if(p.old){
-    const oldNum = parseInt(p.old.replace(/[^\d]/g,""));
-    const saved = oldNum - p.price;
-    const pct = Math.round(saved/oldNum*100);
-    document.getElementById("s-save").textContent = `Save ₹${saved.toLocaleString("en-IN")} (${pct}%)`;
-    document.getElementById("s-save").style.display = "";
-  } else {
-    document.getElementById("s-save").style.display = "none";
-  }
-
-  updateSheetPickBtn();
-
-  document.getElementById("sheet").classList.add("open");
-  document.getElementById("overlay").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-
-function updateSheetPickBtn(){
-  const btn = document.getElementById("s-pick");
-  if(!btn || sheetProductId===null) return;
-  btn.classList.toggle("active", picks.has(sheetProductId));
-}
-
-function togglePickFromSheet(){
-  if(sheetProductId !== null) togglePick(sheetProductId);
-}
-
-function closeSheet(){
-  document.getElementById("sheet").classList.remove("open");
-  document.getElementById("overlay").classList.remove("open");
-  document.body.style.overflow = "";
-  sheetProductId = null;
-}
-
-// swipe down to close sheet
-let swipeStartY = 0;
-document.getElementById("sheet").addEventListener("touchstart",e=>{swipeStartY=e.touches[0].clientY;},{passive:true});
-document.getElementById("sheet").addEventListener("touchend",e=>{
-  if(e.changedTouches[0].clientY - swipeStartY > 80) closeSheet();
-},{passive:true});
-
-// swipe down to close panel
-let panSwipeY = 0;
-document.getElementById("picks-panel").addEventListener("touchstart",e=>{panSwipeY=e.touches[0].clientY;},{passive:true});
-document.getElementById("picks-panel").addEventListener("touchend",e=>{
-  if(e.changedTouches[0].clientY - panSwipeY > 60) hidePanel();
-},{passive:true});
-
-/* ── CATEGORY TABS ────────────────────────────────── */
+/* ── CATEGORY ───────────────────────────────────── */
 document.querySelectorAll(".cat-tab").forEach(btn=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".cat-tab").forEach(b=>b.classList.remove("active"));
     btn.classList.add("active");
+
     activeCat = btn.dataset.cat;
     renderGrid();
   });
 });
 
-/* ── SEARCH ───────────────────────────────────────── */
-let searchTimer;
-document.getElementById("search-input").addEventListener("input",e=>{
-  clearTimeout(searchTimer);
-  searchTimer = setTimeout(()=>{
-    searchQuery = e.target.value.trim().toLowerCase();
-    renderGrid();
-  }, 220);
-});
-
-/* ── TOAST ────────────────────────────────────────── */
-function showToast(msg, ico="✓", type="", dur=2800){
+/* ── TOAST ─────────────────────────────────────── */
+function showToast(msg, ico="✓", type=""){
   const wrap = document.getElementById("toast-wrap");
   const el = document.createElement("div");
-  el.className = "toast" + (type?" "+type:"");
-  el.style.setProperty("--tdur", dur/1000+"s");
-  el.innerHTML = `<span class="toast-ico">${ico}</span><span>${msg}</span>`;
+
+  el.className = "toast " + type;
+  el.innerHTML = `<span>${ico}</span> ${msg}`;
+
   wrap.appendChild(el);
-  setTimeout(()=>el.remove(), dur + 400);
+  setTimeout(()=>el.remove(), 2500);
 }
 
-/* ── INIT ─────────────────────────────────────────── */
-renderGrid();
+/* ── INIT (IMPORTANT FIX) ───────────────────────── */
+async function init(){
+  await loadProducts();
+  await loadCombos();
+
+  renderGrid();
+  renderCombos();
+}
+
+init();
 </script>
 </body>
 </html>
