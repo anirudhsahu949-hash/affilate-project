@@ -12,30 +12,19 @@
 <style>
 /* ─── TOKENS ─────────────────────────────────────────── */
 :root {
-  /* BACKGROUND */
-  --bg: #f3f4f6;           /* light grey (Amazon/Zara style) */
-
-  /* SURFACES */
-  --surface: #ffffff;      /* sections */
-  --card: #ffffff;         /* product cards */
-
-  /* TEXT */
-  --ink: #0f172a;
-  --muted: #6b7280;
-
-  /* BRAND */
-  --primary: #2874F0;      /* Flipkart blue */
-  --dark: #1f2937;         /* Amazon dark */
-  --accent: #ff6a3d;       /* CTA / highlight */
-
-  /* BORDERS */
-  --line: #e5e7eb;
-
-  /* SHADOWS (IMPORTANT) */
-  --sh-soft: 0 4px 12px rgba(0,0,0,0.05);
-  --sh-card: 0 8px 24px rgba(0,0,0,0.08);
-
+  --bg: #f5f0eb;
+  --card: #ffffff;
+  --ink: #0f1a16;
+  --muted: #6b7a74;
+  --line: #e2ddd8;
+  --g:    #2874F0;
+  --g2: #232F3E;
+  --coral: #ff5945;
+  --amber: #ffb830;
+  --blue: #3b6eff;
   --r: 16px;
+  --sh: 0 8px 32px rgba(15,26,22,.10);
+  --sh2: 0 2px 8px rgba(15,26,22,.07);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -274,29 +263,24 @@ h1 em{color:var(--g);font-style:normal;}
 .fl-buy:hover,.fl-buy:active{background:var(--g2);transform:scale(.95);}
 
 /* ─── MAIN GRID (2-col compact) ─────────────────────── */
-.grid-section,
-.flatlist,
-.reels-scroll,
-.steps-scroll {
-  background: var(--surface);
-  border-radius: 20px;
-  padding: 16px;
-  margin: 0 20px 24px;
-  box-shadow: var(--sh-soft);
+.grid-section{padding:0 20px;margin-bottom:32px;}
+.prod-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
 }
 
 /* ZARA STYLE PRODUCT CARD */
 .gc {
-  background: var(--card);
-  border-radius: 14px;
-  border: 1px solid var(--line);
-  box-shadow: var(--sh-soft);
-  transition: 0.25s ease;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  transition: 0.3s ease;
 }
 
 .gc:hover {
   transform: translateY(-4px);
-  box-shadow: var(--sh-card);
 }
 
 /* IMAGE */
@@ -449,12 +433,6 @@ h1 em{color:var(--g);font-style:normal;}
 }
 .deal-cta:hover{transform:translateY(-2px);}
 
-.section-divider {
-  height: 1px;
-  background: linear-gradient(to right, transparent, #ddd, transparent);
-  margin: 24px 20px;
-}
-
 /* ─── NEWSLETTER ─────────────────────────────────────── */
 .nl-section{
   margin:0 20px 32px;
@@ -579,18 +557,10 @@ footer{
 
 /* Desktop tweaks */
 @media(min-width:640px){
-  #hero {
-  background: linear-gradient(180deg, #ffffff, #f9fafb);
-  border-bottom: 1px solid var(--line);
-}
+  #hero{max-width:600px;margin:0 auto;}
   .sec-head,.filter-scroll,.grid-section,.deal-banner,.nl-section,.ad-slot,.reels-scroll,.steps-scroll,.flatlist{max-width:640px;margin-inline:auto;}
   .prod-grid{grid-template-columns:repeat(3,1fr);}
-   .fl-card {
-  background: var(--card);
-  border-radius: 18px;
-  border: 1px solid var(--line);
-  box-shadow: var(--sh-soft);
-}
+  .fl-card{flex:0 0 200px;}
 }
 </style>
 </head>
