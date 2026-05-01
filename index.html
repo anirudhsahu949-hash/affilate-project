@@ -12,19 +12,16 @@
 <style>
 /* ─── TOKENS ─────────────────────────────────────────── */
 :root {
-  --bg: #f5f0eb;
-  --card: #ffffff;
-  --ink: #0f1a16;
-  --muted: #6b7a74;
-  --line: #e2ddd8;
-  --g:    #2874F0;
-  --g2: #232F3E;
-  --coral: #ff5945;
-  --amber: #ffb830;
-  --blue: #3b6eff;
-  --r: 16px;
-  --sh: 0 8px 32px rgba(15,26,22,.10);
-  --sh2: 0 2px 8px rgba(15,26,22,.07);
+  --bg: #f8f8f8;        /* soft background (not pure white) */
+  --card: #ffffff;      /* cards stay white */
+  --ink: #111111;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+
+  --primary: #000000;
+  --accent: #2563eb;
+
+  --radius: 16px;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -357,6 +354,17 @@ h1 em{color:var(--g);font-style:normal;}
 }
 .gc-buy:hover,.gc-buy:active{background:var(--g2);transform:scale(.95);}
 
+
+.card, .gc, .fl-card {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+}
+
+.section-alt {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+}
+
 /* ─── REELS ROW ──────────────────────────────────────── */
 .reels-scroll{
   display:flex;gap:12px;overflow-x:auto;
@@ -561,6 +569,10 @@ footer{
   .sec-head,.filter-scroll,.grid-section,.deal-banner,.nl-section,.ad-slot,.reels-scroll,.steps-scroll,.flatlist{max-width:640px;margin-inline:auto;}
   .prod-grid{grid-template-columns:repeat(3,1fr);}
   .fl-card{flex:0 0 200px;}
+}
+
+#hero {
+  background: linear-gradient(to bottom, #ffffff, #f3f4f6);
 }
 </style>
 </head>
