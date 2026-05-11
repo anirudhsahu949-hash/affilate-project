@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Showcase Draft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #0f172a;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background:
+        linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.9)),
+        url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1400&auto=format&fit=crop') center/cover no-repeat;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      align-items: center;
+    }
+
+    .left {
+      animation: fadeUp 1s ease;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      padding: 8px 16px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    h1 span {
+      color: #38bdf8;
+    }
+
+    p {
+      color: #cbd5e1;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .primary {
+      background: #38bdf8;
+      color: #0f172a;
+    }
+
+    .primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(56,189,248,0.35);
+    }
+
+    .secondary {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .secondary:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .card {
+      overflow: hidden;
+      border-radius: 24px;
+      position: relative;
+      min-height: 220px;
+      background: #1e293b;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.08);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+
+    .overlay h3 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .wide {
+      grid-column: span 2;
+      min-height: 260px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media(max-width: 768px) {
+      .hero {
+        padding: 24px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .wide {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="container">
+
+      <div class="left">
+        <div class="tag">Modern Website Photo Draft</div>
+
+        <h1>
+          Create Stunning <span>Photo Experiences</span>
+        </h1>
+
+        <p>
+          A clean and modern website draft for showcasing photos, banners,
+          portfolio images, sports galleries, fashion collections, or app visuals.
+          Replace these images with your own website assets.
+        </p>
+
+        <div class="buttons">
+          <a href="#" class="btn primary">Upload Photos</a>
+          <a href="#" class="btn secondary">View Gallery</a>
+        </div>
+      </div>
+
+      <div class="gallery">
+
+        <div class="card wide">
+          <img src="https://images.unsplash.com/photo-1511886929837-354d827aae26?q=80&w=1400&auto=format&fit=crop" alt="Main Banner">
+          <div class="overlay">
+            <h3>Featured Showcase Banner</h3>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1000&auto=format&fit=crop" alt="Sports">
+          <div class="overlay">
+            <h3>Sports Collection</h3>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?q=80&w=1000&auto=format&fit=crop" alt="Fashion">
+          <div class="overlay">
+            <h3>Fashion Gallery</h3>
+          </div>
+        </div>
+        
+         <div class="card">
+          <img src="/affilate-project/newfeaturegraphic.png" alt="Fashion">
+          <div class="overlay">
+            <h3>Fashion Gallery</h3>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>
